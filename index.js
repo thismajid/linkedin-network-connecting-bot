@@ -15,4 +15,5 @@ let email, password;
   });
 
   email = readline.question(`What is your linkedin email ? `);
+  password = readline.question(`What is your linkedin password ? `);
 })();
