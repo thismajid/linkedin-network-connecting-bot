@@ -1,0 +1,15 @@
+{
+  "name": "linkedin-bot-connect-network",
+  "version": "1.0.0",
+  "description": "a linkedin bot can connect to networks automallically",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "keywords": ["linkedin", "bot", "connect", "network"],
+  "author": "Majid Khorshidian",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^15.3.0"
+  }
+}
