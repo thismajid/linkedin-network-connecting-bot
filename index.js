@@ -13,6 +13,7 @@ async function main() {
   await page.goto("https://www.linkedin.com/login", {
     waitUntil: "networkidle0",
   });
+  await login(email, password, page);
 }
 
 const getUserInfo = (text) => readline.question(text);
