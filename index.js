@@ -1,9 +1,9 @@
 const puppeteer = require("puppeteer");
 const readline = require("readline-sync");
 
-let email, password;
-
-(async () => {
+async function main() {
+  const email = getUserInfo("What is your linkedin email ? ");
+  const password = getUserInfo("What is your linkedin password ? ");
   const browser = await puppeteer.launch({
     headless: false,
     defaultViewport: null,
@@ -13,7 +13,8 @@ let email, password;
   await page.goto("https://www.linkedin.com/login", {
     waitUntil: "networkidle0",
   });
+}
 
-  email = readline.question(`What is your linkedin email ? `);
-  password = readline.question(`What is your linkedin password ? `);
-})();
+const getUserInfo = (text) => readline.question(text);
+
+main();
