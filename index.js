@@ -18,4 +18,12 @@ async function main() {
 
 const getUserInfo = (text) => readline.question(text);
 
+const login = async (email, password, page) =>
+  await Promise.all([
+    page.type("#username", email),
+    page.type("#password", password),
+    page.click('[type="submit"]'),
+    page.waitForNavigation(),
+  ]);
+
 main();
