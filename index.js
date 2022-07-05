@@ -28,4 +28,7 @@ const login = async (email, password, page) =>
     await page.waitForNavigation(),
   ]);
 
+const getNetwork = async (page) =>
+  Promise.all([await page.goto("https://www.linkedin.com/mynetwork/")]);
+
 main();
