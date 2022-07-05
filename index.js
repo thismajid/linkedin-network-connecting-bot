@@ -14,16 +14,18 @@ async function main() {
     waitUntil: "networkidle0",
   });
   await login(email, password, page);
+  await page.waitForTimeout(6000);
+  await getNetwork(page);
 }
 
 const getUserInfo = (text) => readline.question(text);
 
 const login = async (email, password, page) =>
-  await Promise.all([
-    page.type("#username", email),
-    page.type("#password", password),
-    page.click('[type="submit"]'),
-    page.waitForNavigation(),
+  Promise.all([
+    await page.type("#username", email),
+    await page.type("#password", password),
+    await page.click('[type="submit"]'),
+    await page.waitForNavigation(),
   ]);
 
 main();
