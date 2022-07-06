@@ -16,6 +16,12 @@ async function main() {
   await login(email, password, page);
   await page.waitForTimeout(6000);
   await getNetwork(page);
+  await page.waitForTimeout(5000);
+  await page.evaluate(() => {
+    Array.from(document.getElementsByClassName("artdeco-button")).map((btn) =>
+      console.log(btn)
+    );
+  });
 }
 
 const getUserInfo = (text) => readline.question(text);
