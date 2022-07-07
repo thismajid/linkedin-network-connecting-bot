@@ -17,11 +17,13 @@ async function main() {
   await page.waitForTimeout(6000);
   await getNetwork(page);
   await page.waitForTimeout(5000);
-  await page.evaluate(() => {
-    Array.from(document.getElementsByClassName("artdeco-button")).map((btn) =>
-      console.log(btn)
-    );
-  });
+  const myNetworks = await page.evaluate(() => [
+    ...document.getElementsByClassName("artdeco-button"),
+  ]);
+  // const myNetworks = await page.evaluate(() => [
+  //   ...document.querySelector(".artdeco-button").classList,
+  // ]);
+  console.log(myNetworks);
 }
 
 const getUserInfo = (text) => readline.question(text);
