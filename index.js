@@ -20,9 +20,15 @@ async function main() {
   const myNetworks = await page.evaluate(() => [
     ...document.getElementsByClassName("artdeco-button"),
   ]);
-  // const myNetworks = await page.evaluate(() => [
-  //   ...document.querySelector(".artdeco-button").classList,
-  // ]);
+  // await page.evaluate(() => {
+  //   let elements = document.getElementsByClassName("ember-view");
+  //   console.log(elements);
+  //   for (let element of elements) console.log(element);
+  // });
+  // const myNetworks = await page.evaluate(() => {
+  //   const el = document.querySelector("li.ember-view.display-flex");
+  //   console.log(el);
+  // });
   console.log(myNetworks);
 }
 
@@ -37,6 +43,10 @@ const login = async (email, password, page) =>
   ]);
 
 const getNetwork = async (page) =>
-  Promise.all([await page.goto("https://www.linkedin.com/mynetwork/")]);
+  Promise.all([
+    await page.goto("https://www.linkedin.com/mynetwork/", {
+      waitUntil: "domcontentloaded",
+    }),
+  ]);
 
 main();
