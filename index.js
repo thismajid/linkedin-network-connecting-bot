@@ -11,25 +11,17 @@ async function main() {
   });
   const page = await browser.newPage();
   await page.goto("https://www.linkedin.com/login", {
-    waitUntil: "networkidle0",
+    waitUntil: "domcontentloaded",
   });
   await login(email, password, page);
-  await page.waitForTimeout(6000);
+  await page.waitForTimeout(5000);
   await getNetwork(page);
   await page.waitForTimeout(5000);
-  const myNetworks = await page.evaluate(() => [
-    ...document.getElementsByClassName("artdeco-button"),
-  ]);
-  // await page.evaluate(() => {
-  //   let elements = document.getElementsByClassName("ember-view");
-  //   console.log(elements);
-  //   for (let element of elements) console.log(element);
-  // });
-  // const myNetworks = await page.evaluate(() => {
-  //   const el = document.querySelector("li.ember-view.display-flex");
-  //   console.log(el);
-  // });
-  console.log(myNetworks);
+  const networks = await page.$$(".ember-view li");
+  console.log(networks);
+  for (const network of networks) {
+    console.log(await network.evaluate((node) => node.innerText));
+  }
 }
 
 const getUserInfo = (text) => readline.question(text);
