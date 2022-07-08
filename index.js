@@ -14,13 +14,24 @@ async function main() {
     waitUntil: "domcontentloaded",
   });
   await login(email, password, page);
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(8000);
   await getNetwork(page);
-  await page.waitForTimeout(5000);
+  await page.waitForTimeout(8000);
   const networks = await page.$$(".ember-view li");
-  console.log(networks);
   for (const network of networks) {
-    console.log(await network.evaluate((node) => node.innerText));
+    const text = await network.evaluate((node) => node.innerText);
+    const id = await network.evaluate((node) => node.id);
+    if (text.search("mutual connections") != -1) {
+      count = text.split("\n")[5].split("mutual connections")[0];
+      if (+count > 40 && count !== "Member’s occupation") {
+        const el = await page.$(`#${id}`);
+        await el.evaluate(() => {
+          Array.from(document.getElementsByClassName("artdeco-button")).map(
+            (btn) => (btn.innerText == "Connect" ? btn.click() : null)
+          );
+        });
+      }
+    }
   }
 }
 
