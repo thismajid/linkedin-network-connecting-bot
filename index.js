@@ -25,9 +25,14 @@ async function main() {
       count = text.split("\n")[5].split("mutual connections")[0];
       if (+count > 40 && count !== "Member’s occupation") {
         const el = await page.$(`#${id}`);
+        console.log(
+          `Person to be connected: "${text.split("\n")[2]}" with ${text
+            .split("\n")[5]
+            .trim()}`
+        );
         await el.evaluate(() => {
           Array.from(document.getElementsByClassName("artdeco-button")).map(
-            (btn) => (btn.innerText == "Connect" ? btn.click() : null)
+            (btn) => btn.innerText == "Connect" && btn.click()
           );
         });
       }
